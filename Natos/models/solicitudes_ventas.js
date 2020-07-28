@@ -4,11 +4,8 @@ const VentaSchema = mongoose.Schema({
     id: Number,
     cliente: String,
     id_tarima: Number,
-    /*tarima:[{
-        id_tarima: TarimaSchema.id,
-    }],*/
     descripcion_tarima: String,
-    cantidad_tarima: Number,
+    cantidad: Number,
     precio_tarima: Number
 })
 

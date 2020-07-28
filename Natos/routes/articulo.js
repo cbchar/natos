@@ -3,49 +3,22 @@ var router = express.Router();
 
 const mongoose = require('mongoose');
 const Articulo = mongoose.model('Articulo');
-const Proveedor = mongoose.model('Proveedor');
-
-//metodo consultar
-router.get('/consultar', function (req, res) {
-    Articulo.find({}, function (err, articulos) {
-        Proveedor.populate(articulos, { path: "proveedor" }, function (err, articulos) {
-            res.status(200).send(articulos);
-        });
-    });
-});//fin del metodo consultar
 
 //metodo insertar
-router.post('/insertar', (req, res, next) => {
+router.post('/insertar', (req,res,next)=>{
     const articulo = new Articulo(req.body)
-    articulo.save(function (err, articulo) {
-        if (err) {
+    articulo.save(function(err, articulo){
+        if(err){
             return next(err)
         }
         res.json(articulo)
     })
 })//fin de metodo insertar
 
-module.exports = router;
-
-
-
-
-
-
-
-
-/*
 //metodo consultar
-app.get("/consultar", function (req, res) {
-    Articulo.find({}, function (err, libros) {
-        Proveedor.populate(articulos, { path: "proveedor" }, function (err, articulos) {
-            res.status(200).send(articulos);
-        });
-    });
-});
-router.get('/consultar', async(req, res)=>{
-    Articulo.find(function(err,articulo){
-        if(err){
+router.get('/consultar', async (req, res) => {
+    Articulo.find(function (err, articulo) {
+        if (err) {
             return next(err)
         }
         res.json(articulo)
@@ -61,18 +34,19 @@ router.put('/modificar', async (req, res) => {
             cantidad: req.body.cantidad,
             proveedor: req.body.proveedor,
             precio: req.body.precio
-        },
-        {
-            new: true
-        })
-    res.send(proveedor);
+        }, {
+        new: true
+    })
+    res.send(articulo);
 })
 
 //eliminar
 router.post('/eliminar', async (req, res) => { //se hace el borrado con post para usar el body
-    await Articulo.findOneAndDelete({ codigo: req.body.codigo }, function
+    await Articulo.findOneAndDelete({ id: req.body.id }, function
         (err, articulo) {
         if (err) { res.send(err) }
         res.json({ Mensaje: 'El articulo ha sido eliminado' })
     })
-})*/
+})//fin metodo eliminar
+
+module.exports = router;

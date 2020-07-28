@@ -54,6 +54,4 @@ router.post('/eliminar', async (req, res) => { //se hace el borrado con post par
   })
 })//fin del metodo eliminar
 
-
-
 module.exports = router;

@@ -34,7 +34,15 @@ router.get('/consultar', async(req,res,next)=>{//=> funcion anonima
         }
         res.json(cliente)
     })
-})//terminacion de metodo modificar
+})//terminacion de metodo consultar todo
+
+//consultar por id
+router.get('/consultarid/:codigo', async (req, res) => {
+    const cliente = await Cliente.findOne({ id: req.body.id })
+
+    if (cliente) { return res.send(cliente) }
+    return res.send("El cliente no existe")
+}) //fin de metodo consultar por id
 
 //metodo modificar
 router.put('/modificar', async (req, res) => {

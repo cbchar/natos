@@ -29,32 +29,36 @@ router.post('/registrar', [
         username: req.body.username,
         password: passcifrado,
     });
-    await usuarios.save()
+    await Usuario.save()
     res.status(200).send(usuarios)
 }) //termina metodo registrar
 
 
 //metodo iniciar sesion
-router.post('/login', [
-    check('username').isLength({ min: 1 }),
-    check('password').isLength({ min: 1 }),
-    ],
-    async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
+router.post('/login',[
+    check('username').isLength({min:1}),
+    check('password').isLength({min:1})
+  ],async(req,res)=>{
+    const errors= validationResult(req);
+    if(!errors.isEmpty()){
+       return res.status(422).json({errors: errors.array()});
     }
-    let usuario = await Usuario.findOne({ username: req.body.username })
-    if (!usuario) {
-        return res.status(400).send('Usuario o contraseña incorrectos')
+  
+    let usuario=await Usuario.findOne({username: req.body.username})
+  
+    if(!usuario){
+      return res.status(400).send('correo o contraseña incorrectos')
     }
-    const validaPassword = await bcrypt.compare(req.body.password, usuario.password)
-    if (!validaPassword) {
-        return res.status(400).send('Usuario o contraseña incorrectos')
+  
+    const validaPassword= await bcrypt.compare(req.body.password,usuario.password)
+  
+    if(!validaPassword){
+      return res.status(400).send('correo o contraseña incorrectos')
     }
-    const jwtoken = usuario.generadorJWT();
-    //res.status(201).header('Authorization',jwtoken).send("Bienvenido")
-    res.status(201).send({ jwtoken })
-}) //termina metodo login
+  
+    const jwtoken=usuario.generatorJWT();
+    res.status(201).send({jwtoken})
+  
+  }) //termina metodo login
 
 module.exports = router;

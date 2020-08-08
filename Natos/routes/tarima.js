@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const mongoose = require('mongoose');
-const Tarmina = mongoose.model('Tarima');
+const Tarima = mongoose.model('Tarima');
 
 //metodo para insertar
 router.post('/insertar', (req,res,next)=>{
@@ -15,7 +15,7 @@ router.post('/insertar', (req,res,next)=>{
     })
 }) //terminación de metodo insertar
 
-//metodo consultar
+//metodo consultar todo
 router.get('/consultar', async(req, res)=>{
     Tarima.find(function(err,tarima){
         if(err){
@@ -23,7 +23,15 @@ router.get('/consultar', async(req, res)=>{
         }
         res.json(tarima)
     })
-}) //fin de metodo consultar 
+}) //fin de metodo consultar todo
+
+//metodo consultar por id
+router.get('/consultarid/:codigo', async (req, res) => {
+    const tarima = await Tarima.findOne({ id: req.body.id })
+
+    if (tarima) { return res.send(tarima) }
+    return res.send("La tarima no existe")
+})
 
 //metodo modificar 
 router.put('/modificar', async (req, res) => {

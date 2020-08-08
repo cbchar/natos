@@ -16,7 +16,7 @@ router.post('/insertar', (req,res,next)=>{
     })
 })//fin de metodo insertar
 
-//metodo consultar
+//metodo consultar todo
 router.get('/consultar', async(req, res)=>{
     Compra.find(function(err,compra){
         if(err){
@@ -24,7 +24,15 @@ router.get('/consultar', async(req, res)=>{
         }
         res.json(compra)
     })
-})//fin de metodo consultar 
+})//fin de metodo consultar todo
+
+//consultar por id
+router.get('/consultarid/:codigo', async (req, res) => {
+    const compra = await Compra.findOne({ id: req.body.id })
+
+    if (compra) { return res.send(compra) }
+    return res.send("La solicitud de compra no existe")
+}) //fin de metodo consultar por id
 
 //metodo modificar
 router.put('/modificar', async (req, res) => {

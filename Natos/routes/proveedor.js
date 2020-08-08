@@ -15,7 +15,7 @@ router.post('/insertar', (req,res,next)=>{
     })
 }) //terminación de metodo insertar
 
-//metodo consultar
+//metodo consultar todo
 router.get('/consultar', async(req, res)=>{
     Proveedor.find(function(err,proveedor){
         if(err){
@@ -23,7 +23,15 @@ router.get('/consultar', async(req, res)=>{
         }
         res.json(proveedor)
     })
-}) //fin del metodo consultar
+}) //fin del metodo consultar todo
+
+// metodo consultar por id
+router.get('/consultarid/:codigo', async (req, res) => {
+    const proveedor = await Proveedor.findOne({ id: req.body.id })
+
+    if (proveedor) { return res.send(proveedor) }
+    return res.send("El proveedor no existe")
+}) //fin de metodo consultar por id
 
 //metodo modificar
 router.put('/modificar', async (req, res) => {

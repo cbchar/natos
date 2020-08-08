@@ -15,7 +15,7 @@ router.post('/insertar', (req,res,next)=>{
     })
 })//fin de metodo insertar
 
-//metodo consultar
+//metodo consultar todo
 router.get('/consultar', async (req, res) => {
     Articulo.find(function (err, articulo) {
         if (err) {
@@ -23,7 +23,15 @@ router.get('/consultar', async (req, res) => {
         }
         res.json(articulo)
     })
-})//fin de metodo consultar
+})//fin de metodo consultar todo 
+
+//consultar por id
+router.get('/consultarid/:codigo', async (req, res) => {
+    const articulo = await Articulo.findOne({ id: req.body.id })
+
+    if (articulo) { return res.send(articulo) }
+    return res.send("El articulo no existe")
+}) //fin de metodo consultar por id
 
 //metodo modificar
 router.put('/modificar', async (req, res) => {

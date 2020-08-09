@@ -38,16 +38,16 @@ router.put('/modificar', async (req, res) => {
     const tarima = await Tarima.findOneAndUpdate(
         { id: req.body.id },
         {
-            id: req.body.id,
+            id:req.body.id,
             descripcion: req.body.descripcion,
             tipo: req.body.tipo,
             cantidad: req.body.cantidad,
-            precio: req.body.precio
+            precio: req.body.precio,
         },
         {
             new: true
         })
-    res.send(proveedor);
+    res.send(tarima);
   }) //Fin del metodo modificar
 
 //eliminar

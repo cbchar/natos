@@ -53,7 +53,7 @@ router.put('/modificar', async (req, res) => {
 
 //metodo eliminar
 router.post('/eliminar', async (req, res) => { //se hace el borrado con post para usar el body
-  await Vetna.findOneAndDelete({ id: req.body.id }, function
+  await Venta.findOneAndDelete({ id: req.body.id }, function
       (err, venta) {
       if (err) { res.send(err) }
       res.json({ Mensaje: 'La solicitud de venta ha sido eliminada' })

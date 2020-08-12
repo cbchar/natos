@@ -52,11 +52,11 @@ router.put('/modificar', async (req, res) => {
 
 //eliminar
 router.post('/eliminar', async (req, res) => { //se hace el borrado con post para usar el body
-    await Tarima.findOneAndDelete({ codigo: req.body.codigo }, function
+    await Tarima.findOneAndDelete({ id: req.body.id }, function
         (err, tarima) {
         if (err) { res.send(err) }
-        res.json({ Mensaje: 'El articulo ha sido eliminado' })
+        res.json({ Mensaje: 'El artículo ha sido eliminado' })
     })
-  })//fin del metodo eliminar
+  })//fin del metodo eliminar//fin del metodo eliminar
 
 module.exports = router;

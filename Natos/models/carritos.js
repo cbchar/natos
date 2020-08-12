@@ -5,7 +5,8 @@ const CarritoSchema = new mongoose.Schema({
     name: String, 
     quantity: Number, 
     price: Number, 
-    status: String
+    status: String,
+    correo: String
 })
 
 

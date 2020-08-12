@@ -18,6 +18,7 @@ require('./models/tarimas');
 require('./models/articulos');
 require('./models/solicitudes_compras');
 require('./models/solicitudes_ventas');
+require('./models/carritos');
 
 //declaración de rutas
 const indexRouter = require('./routes/index');
@@ -29,6 +30,7 @@ const tarimaRouter = require ('./routes/tarima');
 const articuloRouter = require ('./routes/articulo');
 const solicitud_compraRouter = require('./routes/solicitud_compra');
 const solicitud_ventaRouter = require('./routes/solicitud_venta');
+const carritoRouter = require ('./routes/carrito');
 
 var app = express();
 
@@ -54,6 +56,7 @@ app.use('/tarima', tarimaRouter);
 app.use('/articulo', articuloRouter);
 app.use('/solicitud_compra', solicitud_compraRouter);
 app.use('/solicitud_venta', solicitud_ventaRouter);
+app.use('/carrito', carritoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

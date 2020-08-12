@@ -54,10 +54,10 @@ router.put('/modificar', async (req, res) => {
 
 //metodo eliminar
 router.post('/eliminar', async (req, res) => { //se hace el borrado con post para usar el body
-    await Proveedor.findOneAndDelete({ codigo: req.body.codigo }, function
+    await Proveedor.findOneAndDelete({ id: req.body.id }, function
         (err, proveedor) {
         if (err) { res.send(err) }
-        res.json({ Mensaje: 'El proveedor ha sido eliminado' })
+        res.json({ Mensaje: 'El cliente ha sido eliminado' })
     })
   })//fin del metodo eliminar
 
